@@ -1,9 +1,9 @@
 package com.example.taskapp.ui.onBoarding.adapter
 
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.taskapp.R
@@ -11,7 +11,7 @@ import com.example.taskapp.databinding.ItemOnboardingBinding
 import com.example.taskapp.ui.model.OnBoard
 import com.example.taskapp.ui.utils.loadImage
 
-class OnBoardingAdapter(private val context: Context, private val onClick: () -> Unit) :
+class OnBoardingAdapter() :
     RecyclerView.Adapter<OnBoardingAdapter.OnBoardingViewHolder>() {
 
     private var data = arrayListOf(
@@ -53,12 +53,6 @@ class OnBoardingAdapter(private val context: Context, private val onClick: () ->
         fun bind(onBoard: OnBoard) {
             binding.ivBoarding.loadImage(onBoard.image!!)
             binding.tvTitle.text = onBoard.title
-            binding.tvSkip.text = onBoard.desc
-            if (adapterPosition == data.lastIndex) binding.tvSkip.text =
-                context.getString(R.string.next) else context.getString(R.string.skip)
-            binding.tvSkip.setOnClickListener {
-                onClick()
-            }
         }
     }
 }

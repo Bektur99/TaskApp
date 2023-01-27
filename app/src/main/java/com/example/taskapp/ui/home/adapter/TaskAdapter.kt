@@ -16,8 +16,6 @@ class TaskAdapter : Adapter<TaskAdapter.TaskViewHolder>() {
         notifyItemChanged(0)
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(
             ItemTaskBinding.inflate(
@@ -40,5 +38,4 @@ class TaskAdapter : Adapter<TaskAdapter.TaskViewHolder>() {
             binding.tvDesc.text = task.desc
         }
     }
-
 }

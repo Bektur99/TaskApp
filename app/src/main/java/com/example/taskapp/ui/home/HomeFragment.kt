@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.taskapp.R
 import com.example.taskapp.databinding.FragmentHomeBinding
 import com.example.taskapp.ui.home.adapter.TaskAdapter
@@ -18,16 +18,16 @@ import com.example.taskapp.ui.task.TaskFragment
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private lateinit var adapter:TaskAdapter
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var adapter: TaskAdapter
+    private val task = Task()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val adapter = TaskAdapter()
+        adapter = TaskAdapter()
 
     }
 
@@ -37,27 +37,22 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFragmentResultListener(TaskFragment.RESULT_TASK) { key, bundle ->
-            val result = bundle.getSerializable("task")as Task
-            adapter.addTask(result)
-        }
-
-
-        binding.recyclerView.adapter = adapter
-        binding.fab. setOnClickListener {
-            findNavController().navigate(R.id.taskFragment)
+            setFragmentResultListener(TaskFragment.RESULT_TASK) { key, bundle ->
+                // Здесь можно передать любой тип, поддерживаемый Bundle-ом
+                val result = bundle.getSerializable("task") as Task
+                adapter.addTask(result)
+                Log.e("ololo", "onViewCreated: " + result)
+            }
+            binding.recyclerView.adapter = adapter
+            binding.fab.setOnClickListener {
+                findNavController().navigate(R.id.taskFragment)
+            }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-}

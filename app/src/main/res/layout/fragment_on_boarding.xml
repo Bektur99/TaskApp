@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.onBoarding.OnBoardingFragment">
+    android:layout_height="match_parent">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -16,11 +15,22 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="80dp"
-        app:ci_drawable="@drawable/ic_baseline_circle_24"
-        app:ci_drawable_unselected="@drawable/ic_baseline_circle_24"
+        app:ci_drawable="@drawable/ic_cirle_selekted"
+        app:ci_drawable_unselected="@drawable/ic_cirle_unselekted"
         app:ci_margin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/indicator"
+        android:text="@string/start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

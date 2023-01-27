@@ -28,12 +28,16 @@
         android:label="fragment_task"
         tools:layout="@layout/fragment_task" />
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/navigation_profile"
         android:name="com.example.taskapp.ui.Profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/onBoardingFragment"
         android:name="com.example.taskmanager.ui.onBoarding.OnBoardingFragment"
-        android:label="OnBoardingFragment" />
+        android:label="OnBoardingFragment" >
+        <action
+            android:id="@+id/action_onBoardingFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>
