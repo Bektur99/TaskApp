@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import com.example.taskapp.App
 import com.example.taskapp.databinding.FragmentTaskBinding
 import com.example.taskapp.ui.model.Task
 
@@ -27,13 +26,10 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSave.setOnClickListener {
-            setFragmentResult(
-                RESULT_TASK, bundleOf(
-                    "task" to
-                            Task(
-                                tittle = binding.etTittle.text.toString(),
-                                desc = binding.etDesc.text.toString()
-                            )
+            App.db.taskDao().insert(
+                Task(
+                    tittle = binding.etTittle.text.toString(),
+                    desc = binding.etDesc.text.toString()
                 )
             )
             findNavController().navigateUp()

@@ -8,12 +8,13 @@ import com.example.taskapp.databinding.ItemTaskBinding
 import com.example.taskapp.ui.model.Task
 
 
-class TaskAdapter : Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter() : Adapter<TaskAdapter.TaskViewHolder>() {
     private val data = arrayListOf<Task>()
 
-    fun addTask(task: Task) {
-        data.add(0,task)
-        notifyItemChanged(0)
+    fun addTask(task: List<Task>) {
+        data.clear()
+        data.addAll(task)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {

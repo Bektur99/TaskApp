@@ -7,7 +7,6 @@ class Pref(val context: Context) {
 
     private val pref = context.getSharedPreferences(PREF_NAME, MODE_PRIVATE)
 
-
     fun isUserSeen():Boolean{
         return pref.getBoolean(SEEN_KEY,false)
     }
@@ -15,8 +14,6 @@ class Pref(val context: Context) {
     fun saveSeen(){
         pref.edit().putBoolean(SEEN_KEY,true).apply()
     }
-
-
 
     //age
     fun setAge(age: String) {
