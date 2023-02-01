@@ -16,15 +16,15 @@ class OnBoardingAdapter() :
 
     private var data = arrayListOf(
         OnBoard(
-            "https://user-images.githubusercontent.com/96876621/208057403-41a19d9e-0072-4028-977c-32e1ccd306d1.png",
+            R.raw.lottie,
             "Productivity"
         ),
         OnBoard(
-            "https://user-images.githubusercontent.com/96876621/208063667-a4bf40de-cf16-4c40-ad39-b51b29ac8ee0.png",
+            R.raw.lottie,
             "Made by those who use"
         ),
         OnBoard(
-            "https://user-images.githubusercontent.com/96876621/208063679-b1d4fd9e-f2d5-4848-a2c7-fd94d0e21902.png",
+            R.raw.lottie,
             "Sync with other devices"
         )
     )
@@ -51,7 +51,7 @@ class OnBoardingAdapter() :
     inner class OnBoardingViewHolder(private val binding: ItemOnboardingBinding) :
         ViewHolder(binding.root) {
         fun bind(onBoard: OnBoard) {
-            binding.ivBoarding.loadImage(onBoard.image!!)
+            onBoard.image?.let { binding.ivBoarding.setAnimation(it) }
             binding.tvTitle.text = onBoard.title
         }
     }
