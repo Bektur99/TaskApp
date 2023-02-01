@@ -8,7 +8,7 @@ import com.example.taskapp.databinding.ItemTaskBinding
 import com.example.taskapp.ui.model.Task
 
 
-class TaskAdapter() : Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val onLongClick:(Task)->Unit) : Adapter<TaskAdapter.TaskViewHolder>() {
     private val data = arrayListOf<Task>()
 
     fun addTask(task: List<Task>) {
@@ -37,6 +37,11 @@ class TaskAdapter() : Adapter<TaskAdapter.TaskViewHolder>() {
         fun bind(task: Task) {
             binding.tvTittle.text = task.tittle
             binding.tvDesc.text = task.desc
+
+            itemView.setOnLongClickListener {
+                onLongClick(task)
+                false
+            }
         }
     }
 }

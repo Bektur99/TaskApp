@@ -1,5 +1,7 @@
 package com.example.taskapp.ui.home
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +26,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = TaskAdapter()
+        adapter = TaskAdapter(this::onLongClick)
     }
 
     override fun onCreateView(
@@ -39,12 +41,33 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tasks = App.db.taskDao().getAll()
-        adapter.addTask(tasks)
-            binding.recyclerView.adapter = adapter
-            binding.fab.setOnClickListener {
-                findNavController().navigate(R.id.taskFragment)
-            }
+        setData()
+        binding.recyclerView.adapter = adapter
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.taskFragment)
         }
     }
+
+    fun setData() {
+        val tasks = App.db.taskDao().getAll()
+        adapter.addTask(tasks)
+    }
+    private fun onLongClick(task: Task){
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setTitle("Do you want to delete?")
+        alertDialog.setNegativeButton("NO",object :DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                dialog?.cancel()
+            }
+        })
+        alertDialog.setPositiveButton("Yes",object :DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                App.db.taskDao().delete(task)
+                setData()
+            }
+        })
+        alertDialog.create().show()
+    }
+
+}
 
