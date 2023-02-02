@@ -10,4 +10,6 @@
     <string name="next" />
     <string name="skip" />
     <string name="start">Start</string>
+    <string name="input_phon_number">Input phon number</string>
+    <string name="accept">Accept</string>
 </resources>

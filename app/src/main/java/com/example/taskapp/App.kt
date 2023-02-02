@@ -2,23 +2,22 @@ package com.example.taskapp
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.taskapp.data.database.AppDatabase
+import com.google.firebase.FirebaseApp
 
-class App:Application() {
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-         db = Room.databaseBuilder(
+        db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "database-name"
         ).allowMainThreadQueries().build()
     }
 
 
-    companion object{
-        lateinit var db:AppDatabase
+    companion object {
+        lateinit var db: AppDatabase
     }
 
 }
